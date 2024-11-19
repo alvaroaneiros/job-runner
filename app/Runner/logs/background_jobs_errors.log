@@ -1,0 +1,6 @@
+[2024-11-18 06:15:50] WARNING: Job 'MyJobClass->processJob' failed. Retrying... []
+[2024-11-18 06:29:23] WARNING: Job 'MyJobClass->processJob' failed. Retrying... []
+[2024-11-18 06:30:03] WARNING: Job 'MyJobClass->processJob' failed. Retrying... []
+[2024-11-18 06:56:24] WARNING: Job 'MyJobClass->processJob' failed. Retrying... []
+[2024-11-18 18:06:18] WARNING: Job 'MyJobClass->processJob' failed. Retrying... []
+[2024-11-18 18:10:29] WARNING: Job 'MyJobClass->processJob' failed. Retrying... []
