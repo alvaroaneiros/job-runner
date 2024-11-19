@@ -20,71 +20,56 @@ This project is a Laravel-based system for managing and running background jobs.
    cd <project-directory>
 
 
-Install dependencies:
+# Job Runner Setup Guide
 
-bash
-Copiar código
+## 1. Install Dependencies
+
+Run the following command to install the necessary dependencies for the project:
+
+```bash
 composer install
-Configure your environment:
-
-Copy .env.example to .env:
-bash
-Copiar código
-cp .env.example .env
-Set the SQLite database path in .env:
-dotenv
-Copiar código
-DB_CONNECTION=sqlite
-DB_DATABASE=/absolute/path/to/database/jobs.db
-Prepare the SQLite database:
-
-Create the SQLite file:
-bash
-Copiar código
-touch /absolute/path/to/database/jobs.db
-Run migrations:
-bash
-Copiar código
-php artisan migrate
 
 
+## Configure Your Environment
 
-Monitoring Job Status
-Job statuses are logged in the SQLite database. To check the status:
+1. **Copy `.env.example` to `.env`:**
 
-Open the database using a tool like sqlite3:
-bash
-Copiar código
-sqlite3 /absolute/path/to/database/jobs.db
-Query the jobs table:
-sql
-Copiar código
-SELECT * FROM jobs ORDER BY created_at ASC;
+    ```bash
+    cp .env.example .env
+    ```
 
+2. **Set the SQLite database path in `.env`:**
 
+    Open `.env` and add the following line to set the database path:
 
-Configuration
-Approved Classes
-Only pre-approved classes can run as jobs for security purposes. Update the allowedClasses array in App\Runner\BackgroundJobService:
+    ```dotenv
+    DB_CONNECTION=sqlite
+    DB_DATABASE=/absolute/path/to/database/jobs.db
+    ```
+## Configuration: Approved Classes
 
-php
-Copiar código
+Only pre-approved classes can run as jobs for security purposes. Update the `allowedClasses` array in `App\Runner\BackgroundJobService`:
+
+```php
 protected $allowedClasses = [
     'App\Jobs\MyJobClass',
     'App\Jobs\AnotherJobClass',
 ];
 
 
-Key Components
-Artisan Command: JobRunner
-Located in app/Console/Commands/JobRunner.php, this command accepts a class, method, and optional parameters for execution.
+## Key Components
 
-SQLite Database
-The jobs table in the SQLite database tracks job statuses and logs. Fields include:
+### Artisan Command: JobRunner
 
-id: Unique job ID.
-class: The class being executed.
-method: The method being executed.
-params: Parameters passed to the method.
-status: Status of the job (pending, completed, or failed).
-created_at: Timestamp when the job was created.
+The `JobRunner` Artisan command is located in `app/Console/Commands/JobRunner.php`. This command accepts a class, method, and optional parameters for execution.
+
+### SQLite Database
+
+The `jobs` table in the SQLite database tracks job statuses and logs. Fields include:
+
+- **id**: Unique job ID.
+- **class**: The class being executed.
+- **method**: The method being executed.
+- **params**: Parameters passed to the method.
+- **status**: Status of the job (pending, completed, or failed).
+- **created_at**: Timestamp when the job was created.
